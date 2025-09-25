@@ -1,7 +1,12 @@
 var logic = {}
 
-/**
- * Registers a user.
+/** 
+ * Register a user 
+ * 
+ * @param {String} fullName The full name of the user.
+ * @param {String} dateOfBirth The date of birth.
+ * @param {String} email The e-mail of the user.
+ * @param {String} password The password of the user.
  */
 logic.registerUser = function (fullName, dateOfBirth, email, password) {
     for (var i = 0; i < data.users.length; i++) {
@@ -20,6 +25,11 @@ logic.registerUser = function (fullName, dateOfBirth, email, password) {
     data.users.push(user)
 }
 
+/**
+ * Logs a user in the system.
+ * @param {String} email The user email.
+ * @param {String} password The password of the user.
+ */
 logic.loginUser = function (email, password) {
     for (var i = 0; i < data.users.length; i++) {
         var user = data.users[i]
@@ -28,12 +38,20 @@ logic.loginUser = function (email, password) {
             if (user.password === password) {
                 return
             }
+
             throw new Error('wrong password')
         }
     }
+
     throw new Error('wrong email')
 }
 
+/**
+ * Gets user Info in the system.
+ * @param {String} email The email of the user.
+ * @returns The public information of the user (fullName, dateOfBirth, email.)
+ * 
+ */
 logic.getUserInfo = function (email) {
     for (var i = 0; i < data.users.length; i++) {
         var user = data.users[i]
@@ -46,44 +64,62 @@ logic.getUserInfo = function (email) {
             }
         }
     }
+
     throw new Error('user not found')
 }
 
-logic.changeUserPassword = function (email, currentPassword, newPassword, newPassowrd 2) {
+/**
+ * Changes the User password in the system.
+ * @param {String} email The e-mail of the user.
+ * @param {String} currentPassword The current password of the user.
+ * @param {String} newPassword The new password of the user.
+ * @param {String} newPassowrd The repetition of the new password of the user.
+ * @param {any} 
+ * @returns 
+ */
+logic.changeUserPassword = function (email, currentPassword, newPassword, newPasswordRepeat) {
     for (var i = 0; i < data.users.length; i++) {
         var user = data.users[i]
 
         if (user.email === email) {
-            if (user.email === email) {
-                if (user.password === currentPassword) {
-                    if (newPassword === newPassowrd) {
+            if (user.password === currentPassword) {
+                if (newPassword === newPasswordRepeat) {
 
-                        user.password = newPassowrd
+                    user.password = newPassword
 
-                        return
-                    }
-                    throw new Error('new password do not match new password 2')
+                    return
                 }
-                throw new Error('wrong password')
+
+                throw new Error('new password does not match new password repeat')
             }
+
+            throw new Error('wrong password')
         }
     }
+
     throw new Error('user not found')
 }
 
-logic.changeUserEmail = function (Email, newEmail, newEmail2) {
+/**
+ * Changes the user password in the system.
+ * @param {String} email    The email of the user.
+ * @param {String} newEmail The new email of the user.
+ * @param {String} newEmailRepeat the repetition of the new email of the user.
+ */
+logic.changeUserEmail = function (email, newEmail, newEmailRepeat) {
     for (var i = 0; i < data.users.length; i++) {
         var user = data.users[i];
 
         if (user.email === email) {
-            if (newEmail === newEmail2) {
+            if (newEmail === newEmailRepeat) {
                 user.email = newEmail;
-                
+
                 return
-            } else {
-                throw new Error('emails do not match');
             }
+
+            throw new Error('new e-mail does not match new e-mail repeat');
         }
-        throw new Error('user not found');
     }
+
+    throw new Error('user not found');
 }

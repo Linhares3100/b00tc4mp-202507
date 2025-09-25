@@ -4,18 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <app></app>
-    </title>
+    <title>App</title>
 </head>
 
 <body>
+    <h1>App</h1>
+
     <div>
         <h2>Register</h2>
 
         <form>
-            <label for="fullname">Name</label>
-            <input type="text" id="name" />
+            <label for="fullName">Name</label>
+            <input type="text" id="fullName" />
 
             <label for="dateOfBirth">Date of birth</label>
             <input type="date" id="dateOfBirth" />
@@ -23,7 +23,7 @@
             <label for="email">E-mail</label>
             <input type="email" id="email" />
 
-            <label for="password">password</label>
+            <label for="password">Password</label>
             <input type="password" id="password" />
 
             <button type="submit">Register</button>
@@ -52,7 +52,43 @@
         <h2>Home</h2>
 
         <p>Hello, [fullName]!</p>
+
+        <div>
+            <h3>Change e-mail</h3>
+            
+            <form>
+                <label for="email">E-mail</label>
+                <input type="email" id="email">
+
+                 <label for="newEmail">E-mail</label>
+                <input type="email" id="newEmail">
+
+                 <label for="newEmail2">New e-mail repeat</label>
+                <input type="email" id="email">
+            
+                <button type="submit">Change e-mail</button>
+            </form>
+        </div>
+
+        <div>
+            <h3>Change password</h3>
+            
+            <form>
+                <label for="password">Password</label>
+                <input type="password" id="password">
+
+                 <label for="newPassword">New password</label>
+                <input type="password" id="newPassword">
+
+                 <label for="newPasswordRepeat">New password repeat</label>
+                <input type="password" id="newPasswordRepeat">
+            
+                <button type="submit">Change password</button>
+            </form>
+        </div>
     </div>
+    <script src="data.js"></script>
+    <script src="logic.js"></script>
 </body>
 
 </html>
