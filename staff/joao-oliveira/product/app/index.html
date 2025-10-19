@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>App</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -56,15 +59,15 @@
         <div>
             <h3>Change e-mail</h3>
 
-            <form>
+            <form id="changeEmailForm">
                 <label for="email">E-mail</label>
                 <input type="email" id="email">
 
-                <label for="newEmail">E-mail</label>
+                <label for="newEmail">New e-mail</label>
                 <input type="email" id="newEmail">
 
                 <label for="newEmail2">New e-mail repeat</label>
-                <input type="email" id="email">
+                <input type="email" id="newEmailRepeat">
 
                 <button type="submit">Change e-mail</button>
             </form>
@@ -73,7 +76,7 @@
         <div>
             <h3>Change password</h3>
 
-            <form>
+            <form id="changePasswordForm">
                 <label for="password">Password</label>
                 <input type="password" id="password">
 

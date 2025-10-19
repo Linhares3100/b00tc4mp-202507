@@ -1,3 +1,5 @@
+var loggedInEmail = null
+
 //register
 
 var registerView = document.querySelector('#registerView')
@@ -45,7 +47,9 @@ loginForm.addEventListener('submit', function (event) {
 
     logic.loginUser(email, password)
 
-    logic.form.reset()
+    loginForm.reset()
+
+    loggedInEmail = email
 
     loginView.style.display = 'none'
     homeView.style.display = 'block'
@@ -64,3 +68,44 @@ registerLink.addEventListener('click', function (event) {
 
 var homeView = document.querySelector('#homeView')
 homeView.style.display = 'none'
+
+var changeEmailForm = homeView.querySelector('#changeEmailForm')
+
+changeEmailForm.addEventListener('submit', function (event) {
+    event.preventDefault()
+
+    var email = changeEmailForm.email.value
+    var newEmail = changeEmailForm.newEmail.value
+    var newEmailRepeat = changeEmailForm.newEmailRepeat.value
+
+    logic.changeUserEmail(email, newEmail, newEmailRepeat)
+
+    changeEmailForm.reset()
+
+    alert('e-mail changed')
+})
+
+var changePasswordForm = homeView.querySelector('#changePasswordForm')
+
+changePasswordForm.addEventListener('submit', function(event) {
+  event.preventDefault()
+
+  var password = changePasswordForm.password.value
+  var newPassword = changePasswordForm.newPassword.value
+  var newPasswordRepeat = changePasswordForm.newPasswordRepeat.value
+
+  logic.changeUserPassword(loggedInEmail, password, newPassword, newPasswordRepeat)
+
+  changePasswordForm.reset()
+
+  alert('password changed')
+})
+
+var logoutButton = homeView.querySelector('click', function (event) {
+    event.preventDefault()
+    
+    loggedInEmail = null 
+
+    homeView.style.display = 'none'
+    loginView.style.display = 'block'
+})
