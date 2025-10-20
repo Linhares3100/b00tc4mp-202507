@@ -82,6 +82,8 @@ changeEmailForm.addEventListener('submit', function (event) {
 
     changeEmailForm.reset()
 
+    loggedInEmail = newEmail
+
     alert('e-mail changed')
 })
 
@@ -101,10 +103,12 @@ changePasswordForm.addEventListener('submit', function(event) {
   alert('password changed')
 })
 
-var logoutButton = homeView.querySelector('click', function (event) {
+var logoutButton = homeView.querySelector('#logoutButton')
+
+logoutButton.addEventListener('click', function (event) {
     event.preventDefault()
-    
-    loggedInEmail = null 
+
+    loggedInEmail = null
 
     homeView.style.display = 'none'
     loginView.style.display = 'block'
