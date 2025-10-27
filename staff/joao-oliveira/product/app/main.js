@@ -51,6 +51,11 @@ loginForm.addEventListener('submit', function (event) {
 
     loggedInEmail = email
 
+    var userInfo = logic.getUserInfo(loggedInEmail)
+
+    var fullNameSpan = homeView.querySelector('#fullNameSpan')
+    fullNameSpan.textContent = userInfo.fullName
+
     loginView.style.display = 'none'
     homeView.style.display = 'block'
 })
@@ -112,4 +117,24 @@ logoutButton.addEventListener('click', function (event) {
 
     homeView.style.display = 'none'
     loginView.style.display = 'block'
+})
+
+var profilePanel = homeView.querySelector('#profilePanel')
+
+profilePanel.style.display = 'none'
+
+var profileLink = homeView.querySelector('#profileLink')
+
+profileLink.addEventListener('click', function (event) {
+    event.preventDefault()
+
+    profilePanel.style.display = 'block'
+})
+
+var homeLink = homeView.querySelector('#homeLink')
+
+homeLink.addEventListener('click', function (event) {
+    event.preventDefault()
+
+    profilePanel.style.display = 'none'
 })
