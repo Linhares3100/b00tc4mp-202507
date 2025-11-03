@@ -59,7 +59,8 @@
 
             <a id="profileLink" href="http://">Profile</a>
 
-                <button id="logoutButton">Logout</button>
+            <button id="addPostButton">+</button>
+            <button id="logoutButton">Logout</button>
         </div>
 
         <div id="profilePanel">
@@ -97,6 +98,27 @@
                 </form>
             </div>
         </div>
+
+        <div id="postList">
+
+        </div>
+
+        <div id="addPostPanel">
+            <h3>Add Post</h3>
+
+            <form id="addPostForm">
+                <label for="image">Image</label>
+                <input type="text" id="image">
+
+                <label for="text">Text</label>
+                <input type="text" id="text">
+
+                <button type="submit">Add Post</button>
+
+            </form>
+        </div>
+    </div>
+
     </div>
     <script src="data.js"></script>
     <script src="logic.js"></script>

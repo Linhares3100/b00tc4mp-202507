@@ -56,6 +56,24 @@ loginForm.addEventListener('submit', function (event) {
     var fullNameSpan = homeView.querySelector('#fullNameSpan')
     fullNameSpan.textContent = userInfo.fullName
 
+    var posts = logic.getPosts(loggedInEmail)
+
+    postList.innerHTML = ''
+
+    for (var i = 0; i < posts.length; i++) {
+        var post = posts[i]
+
+        var postElement = document.createElement('div')
+
+        postElement.innerHTML = `
+            <h3>${post.author}</h3>
+            <img src="${post.image}" width="200">
+            <p>${post.text}</p>
+            <small>${post.date}</small>
+        `
+        postList.appendChild(postElement)
+    }
+
     loginView.style.display = 'none'
     homeView.style.display = 'block'
 })
@@ -94,18 +112,18 @@ changeEmailForm.addEventListener('submit', function (event) {
 
 var changePasswordForm = homeView.querySelector('#changePasswordForm')
 
-changePasswordForm.addEventListener('submit', function(event) {
-  event.preventDefault()
+changePasswordForm.addEventListener('submit', function (event) {
+    event.preventDefault()
 
-  var password = changePasswordForm.password.value
-  var newPassword = changePasswordForm.newPassword.value
-  var newPasswordRepeat = changePasswordForm.newPasswordRepeat.value
+    var password = changePasswordForm.password.value
+    var newPassword = changePasswordForm.newPassword.value
+    var newPasswordRepeat = changePasswordForm.newPasswordRepeat.value
 
-  logic.changeUserPassword(loggedInEmail, password, newPassword, newPasswordRepeat)
+    logic.changeUserPassword(loggedInEmail, password, newPassword, newPasswordRepeat)
 
-  changePasswordForm.reset()
+    changePasswordForm.reset()
 
-  alert('password changed')
+    alert('password changed')
 })
 
 var logoutButton = homeView.querySelector('#logoutButton')
@@ -128,6 +146,8 @@ var profileLink = homeView.querySelector('#profileLink')
 profileLink.addEventListener('click', function (event) {
     event.preventDefault()
 
+    postList.style.display = 'none'
+    addPostPanel.style.display = 'none'
     profilePanel.style.display = 'block'
 })
 
@@ -137,4 +157,22 @@ homeLink.addEventListener('click', function (event) {
     event.preventDefault()
 
     profilePanel.style.display = 'none'
+    addPostPanel.style.display = 'none'
+    postList.style.display = 'block'
+})
+
+var postList = homeView.querySelector('#postList')
+
+var addPostPanel = homeView.querySelector('#addPostPanel')
+addPostPanel.style.display = 'none'
+
+var addPostButton = homeView.querySelector('#addPostButton')
+
+addPostButton.addEventListener('click', function (event) {
+    event.preventDefault()
+
+    postList.style.display = 'none'
+    profilePanel.style.display = 'none'
+    addPostPanel.style.display = 'block'
+
 })
