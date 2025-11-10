@@ -152,3 +152,24 @@ logic.getPosts = function (email) {
 
     return data.posts
 }
+
+logic.addPost = function (email, image, text) {
+    for (var i = 0; i < data.users.length; i++) {
+        var user = data.users[i]
+
+        if (user.email === email) {
+            var post = {
+                author: email,
+                image: image,
+                text: text,
+                date: new Date().toISOString()
+            }
+
+            data.posts.push(post)
+
+            return
+        }
+    }
+
+    throw new Error('user not found')
+}
