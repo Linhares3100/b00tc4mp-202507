@@ -1,21 +1,21 @@
-var logic = {}
+let logic = {}
 
-/** 
- * Register a user 
+/**
+ * Registers a user in the system.
  * 
- * @param {String} fullName The full name of the user.
- * @param {String} dateOfBirth The date of birth.
- * @param {String} email The e-mail of the user.
- * @param {String} password The password of the user.
+ * @param {string} fullName The full name of the user.
+ * @param {string} dateOfBirth The date of birth of the user.
+ * @param {string} email The e-mail of the user.
+ * @param {string} password The password of the user.
  */
 logic.registerUser = function (fullName, dateOfBirth, email, password) {
-    for (var i = 0; i < data.users.length; i++) {
-        var user = data.users[i]
+    for (let i = 0; i < data.users.length; i++) {
+        let user = data.users[i]
 
         if (user.email === email) throw new Error('user already exits')
     }
 
-    var user = {
+    let user = {
         fullName: fullName,
         dateOfBirth: dateOfBirth,
         email: email,
@@ -27,12 +27,13 @@ logic.registerUser = function (fullName, dateOfBirth, email, password) {
 
 /**
  * Logs a user in the system.
- * @param {String} email The user email.
- * @param {String} password The password of the user.
+ * 
+ * @param {string} email The e-mail of the user.
+ * @param {string} password The password of the user. 
  */
 logic.loginUser = function (email, password) {
-    for (var i = 0; i < data.users.length; i++) {
-        var user = data.users[i]
+    for (let i = 0; i < data.users.length; i++) {
+        let user = data.users[i]
 
         if (user.email === email) {
             if (user.password === password) {
@@ -47,14 +48,15 @@ logic.loginUser = function (email, password) {
 }
 
 /**
- * Gets user Info in the system.
- * @param {String} email The email of the user.
- * @returns The public information of the user (fullName, dateOfBirth, email.)
+ * Gets user info in the system.
  * 
+ * @param {string} email The e-mail of the user.
+ * 
+ * @returns The public information of the user (fullName, dateOfBirth, email). 
  */
 logic.getUserInfo = function (email) {
-    for (var i = 0; i < data.users.length; i++) {
-        var user = data.users[i]
+    for (let i = 0; i < data.users.length; i++) {
+        let user = data.users[i]
 
         if (user.email === email) {
             return {
@@ -69,21 +71,45 @@ logic.getUserInfo = function (email) {
 }
 
 /**
- * Changes the User password in the system.
- * @param {String} email The e-mail of the user.
- * @param {String} currentPassword The current password of the user.
- * @param {String} newPassword The new password of the user.
- * @param {String} newPassowrd The repetition of the new password of the user.
- * @param {any} 
- * @returns 
+ * Changes the user password in the system.
+ * 
+ * @param {string} email The e-mail of the user.
+ * @param {string} newEmail The new e-mail of the user.
+ * @param {string} newEmailRepeat The repetition of the new e-mail of the user.
  */
-logic.changeUserPassword = function (email, currentPassword, newPassword, newPasswordRepeat) {
-    for (var i = 0; i < data.users.length; i++) {
-        var user = data.users[i]
+logic.changeUserEmail = function (email, newEmail, newEmailRepeat) {
+    for (let i = 0; i < data.users.length; i++) {
+        let user = data.users[i];
 
         if (user.email === email) {
-            if (user.password === currentPassword) {
-                if (newPassword === newPasswordRepeat) {
+            if (newEmail === newEmailRepeat) {
+                user.email = newEmail
+
+                return
+            }
+
+            throw new Error('new e-mail does not match new e-mail repeat')
+        }
+    }
+
+    throw new Error('user not found')
+}
+
+/**
+ * Changes the user password in the system.
+ * 
+ * @param {string} email The e-mail of the user.
+ * @param {string} password The current password of the user.
+ * @param {string} newPassword The new password of the user.
+ * @param {string} newPassowrdRepeat The repetition of the new password of the user. 
+ */
+logic.changeUserPassword = function (email, password, newPassword, newPassowrdRepeat) {
+    for (let i = 0; i < data.users.length; i++) {
+        let user = data.users[i]
+
+        if (user.email === email) {
+            if (user.password === password) {
+                if (newPassword === newPassowrdRepeat) {
 
                     user.password = newPassword
 
@@ -101,64 +127,60 @@ logic.changeUserPassword = function (email, currentPassword, newPassword, newPas
 }
 
 /**
- * Changes the user password in the system.
- * @param {String} email    The email of the user.
- * @param {String} newEmail The new email of the user.
- * @param {String} newEmailRepeat the repetition of the new email of the user.
- */
-logic.changeUserEmail = function (email, newEmail, newEmailRepeat) {
-    for (var i = 0; i < data.users.length; i++) {
-        var user = data.users[i];
-
-        if (user.email === email) {
-            if (newEmail === newEmailRepeat) {
-                user.email = newEmail;
-
-                return
-            }
-
-            throw new Error('new e-mail does not match new e-mail repeat');
-        }
-    }
-
-    throw new Error('user not found');
-}
-
-/** 
  * Returns all posts in the system.
  * 
- * @param{string} email The e-mail of the user.
+ * @param {string} email The e-mail of the user.
  * @returns An array of posts.
  */
 logic.getPosts = function (email) {
-    //check user exits.
-
-    var userExits = false
-
-    for (var i = 0; i < data.users.length; i++) {
-        var user = data.users[i]
+    for (let i = 0; i < data.users.length; i++) {
+        let user = data.users[i]
 
         if (user.email === email) {
-            userExits = true
+            let posts2 = []
 
-            break
+            for (let j = 0; j < data.posts.length; j++) {
+                let post = data.posts[j]
+
+                let post2 = {
+                    id: post.id,
+                    author: post.author,
+                    image: post.image,
+                    text: post.text,
+                    date: post.date
+                }
+
+                if (post.author === email) {
+                    post2.own = true
+                } else {
+                    post2.own = false
+                }
+
+                posts2.push(post2)
+            }
+
+            return posts2
         }
     }
 
-
-    if (!userExits) throw new Error('user not fond')
-
-    //rerturn all posts
-
-    return data.posts
+    throw new Error('user not found')
 }
 
+
+/** 
+ * Adds a post to the system.
+ * 
+ * @param {string} email The e-mail of the user.
+ * @param {string} image The image URL of the post.
+ * @param {string} text The text content of the post.
+ */
 logic.addPost = function (email, image, text) {
-    for (var i = 0; i < data.users.length; i++) {
-        var user = data.users[i]
+    for (let i = 0; i < data.users.length; i++) {
+        let user = data.users[i]
 
         if (user.email === email) {
-            var post = {
+            let post = {
+                id: 'post-' + data.postsCounter,
                 author: email,
                 image: image,
                 text: text,
@@ -166,8 +188,41 @@ logic.addPost = function (email, image, text) {
             }
 
             data.posts.push(post)
+            data.postsCounter++
 
             return
+        }
+    }
+
+    throw new Error('user not found')
+}
+
+/** 
+ * Deletes a post from the system.
+ * 
+ * @param {string} email The e-mail of the user.
+ * @param {string} postId The identifier of the post.
+ */
+logic.deletePost = function (email, postId) {
+    for (let i = 0; i < data.users.length; i++) {
+        let user = data.users[i]
+
+        if (user.email === email) {
+            for (let j = 0; j < data.posts.length; j++) {
+                let post = data.posts[j]
+
+                if (post.id === postId) {
+                    if (post.author === email) {
+                        data.posts.splice(j, 1)
+
+                        return
+                    }
+
+                    throw new Error('user not author of post')
+                }
+            }
+
+            throw new Error('post not found')
         }
     }
 
